@@ -26,21 +26,25 @@ document.getElementById('backspace').addEventListener('click', () => {
     output = output.slice(0, -1)
     document.getElementById('input').value = output;
 })
-let tryLeft  = 3;
+let tryLeft = 3;
 function checkSubmit() {
-    const inputValue = parseInt(document.getElementById('input').value);
-    const genaretedValue = parseInt(document.getElementById('generate-pin').value);
-    if (genaretedValue === inputValue) {
-        document.getElementById('success').style.display = 'block';
-        document.getElementById('failed').style.display = 'none';
+    if (tryLeft === 0) {
+        document.getElementById('submit').attr("disabled", "disabled");
     } else {
-        document.getElementById('success').style.display = 'none';
-        document.getElementById('failed').style.display = 'block';
-        document.getElementById('try-left').innerText = tryLeft;
-        tryLeft --;
-        document.getElementById('try-left').innerText = tryLeft;
-        if (tryLeft === 0) {
-            document.getElementsByTagName('button').attr("disabled", "disabled");
+        const inputValue = parseInt(document.getElementById('input').value);
+        const genaretedValue = parseInt(document.getElementById('generate-pin').value);
+        if (genaretedValue === inputValue) {
+            document.getElementById('success').style.display = 'block';
+            document.getElementById('failed').style.display = 'none';
+        } else {
+            document.getElementById('success').style.display = 'none';
+            document.getElementById('failed').style.display = 'block';
+            document.getElementById('try-left').innerText = tryLeft;
+            tryLeft--;
+            document.getElementById('try-left').innerText = tryLeft;
+            if (tryLeft === 0) {
+                document.getElementsByTagName('button').attr("disabled", "disabled");
+            }
         }
     }
     output = '';
